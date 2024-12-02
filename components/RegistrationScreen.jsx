@@ -18,6 +18,22 @@ import AddAvatarButton from "../components/AddAvatarButton";
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
 const RegistrationScreen = () => {
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSecure, setIsSecure] = useState(true);
+
+  const onSubmitHandler = () => {
+    const values = { login, email, password };
+    console.log(values);
+
+    Keyboard.dismiss();
+    setEmail("");
+    setPassword("");
+    setLogin("");
+    setIsSecure(true);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingView
