@@ -14,17 +14,24 @@ import {
 import { colors } from "../styles/global";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useNavigation } from "@react-navigation/native";
 import AddAvatarButton from "../components/AddAvatarButton";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
 const RegistrationScreen = () => {
-  const navigation = useNavigation();
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSecure, setIsSecure] = useState(true);
+
+  const showButton = (
+    <TouchableOpacity
+      onPress={() => setIsSecure((p) => !p)}
+      style={styles.showButtonWrapper}
+    >
+      <Text style={styles.showButton}>Показати</Text>
+    </TouchableOpacity>
+  );
 
   const onSubmitHandler = () => {
     const values = { login, email, password };
@@ -68,16 +75,10 @@ const RegistrationScreen = () => {
             <Input
               placeholder="Пароль"
               value={password}
+              outerStyles={styles.passwordButton}
               onChangeText={setPassword}
               isSecure={isSecure}
-              rightButton={
-                <Text
-                  style={styles.showButton}
-                  onPress={() => setIsSecure(!isSecure)}
-                >
-                  {isSecure ? "Показати" : "Сховати"}
-                </Text>
-              }
+              rightButton={showButton}
             />
           </View>
 
@@ -90,7 +91,7 @@ const RegistrationScreen = () => {
             {/* Enlace a iniciar sesión */}
             <View style={styles.signUpContainer}>
               <Text style={styles.signUpText}>Вже є акаунт? </Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <TouchableOpacity>
                 <Text style={[styles.signUpText, styles.signUpRef]}>
                   Увійти
                 </Text>
@@ -131,6 +132,17 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 36,
     textAlign: "center",
+  },
+  passwordButton: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  showButtonWrapper: {
+    position: "absolute",
+    top: 0,
+    right: 16,
+    height: "100%",
+    justifyContent: "center",
   },
   showButton: {
     fontSize: 16,
