@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -13,11 +14,13 @@ import {
 import { colors } from "../styles/global";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
 import AddAvatarButton from "../components/AddAvatarButton";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
 const RegistrationScreen = () => {
+  const navigation = useNavigation();
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
