@@ -14,11 +14,13 @@ import {
 import { colors } from "../styles/global";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
 import AddAvatarButton from "../components/AddAvatarButton";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
 const RegistrationScreen = () => {
+  const navigation = useNavigation();
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,12 +59,10 @@ const RegistrationScreen = () => {
         />
 
         <View style={styles.formContainer}>
-          {/* Avatar */}
           <AddAvatarButton />
 
           <Text style={styles.title}>Реєстрація</Text>
 
-          {/* Inputs */}
           <View style={[styles.innerContainer, styles.inputContainer]}>
             <Input placeholder="Логін" value={login} onChangeText={setLogin} />
 
@@ -82,16 +82,14 @@ const RegistrationScreen = () => {
             />
           </View>
 
-          {/* Botón de registro */}
           <View style={[styles.innerContainer, styles.buttonContainer]}>
             <Button onPress={onSubmitHandler}>
               <Text style={styles.loginButtonText}>Зареєстуватися</Text>
             </Button>
 
-            {/* Enlace a iniciar sesión */}
             <View style={styles.signUpContainer}>
               <Text style={styles.signUpText}>Вже є акаунт? </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                 <Text style={[styles.signUpText, styles.signUpRef]}>
                   Увійти
                 </Text>
