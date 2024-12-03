@@ -6,6 +6,7 @@ import CommentsScreen from "../pages/CommentsScreen";
 import BackButton from "../components/BackButton";
 import { StyleSheet } from "react-native";
 import MapScreen from "../pages/MapScreen";
+import { NavigationContainer } from "@react-navigation/native";
 
 const MainStack = createStackNavigator();
 
@@ -13,7 +14,7 @@ const StackNavigator = () => {
   const isLoggedIn = true;
 
   return (
-    <>
+    <NavigationContainer>
       <MainStack.Navigator
         initialRouteName={isLoggedIn ? "Home" : "Login"}
         screenOptions={{ headerShown: false }}
@@ -62,7 +63,7 @@ const StackNavigator = () => {
           </>
         )}
       </MainStack.Navigator>
-    </>
+    </NavigationContainer>
   );
 };
 
